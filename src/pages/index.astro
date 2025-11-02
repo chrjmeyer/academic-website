@@ -202,8 +202,32 @@ const categoryLabels = {
       </section>
     </article>
   </main>
+</Layout>
 
-  <script type="application/ld+json" set:html={JSON.stringify({
+<script>
+  // Toggle abstract summary text and icon
+  document.addEventListener('DOMContentLoaded', () => {
+    const details = document.querySelectorAll('.paper-details');
+    
+    details.forEach(detail => {
+      detail.addEventListener('toggle', () => {
+        const summary = detail.querySelector('summary');
+        const icon = summary.querySelector('.summary-icon');
+        const text = summary.querySelector('.summary-text');
+        
+        if (detail.open) {
+          icon.textContent = '−';
+          text.textContent = 'Hide abstract';
+        } else {
+          icon.textContent = '+';
+          text.textContent = 'Show abstract';
+        }
+      });
+    });
+  });
+</script>
+
+ <script type="application/ld+json" set:html={JSON.stringify({
     "@context": "https://schema.org",
     "@type": "Person",
     "name": bio.name,
@@ -230,29 +254,3 @@ const categoryLabels = {
       "Field Experiments"
     ]
   })} />
-
-
-</Layout>
-
-<script>
-  // Toggle abstract summary text and icon
-  document.addEventListener('DOMContentLoaded', () => {
-    const details = document.querySelectorAll('.paper-details');
-    
-    details.forEach(detail => {
-      detail.addEventListener('toggle', () => {
-        const summary = detail.querySelector('summary');
-        const icon = summary.querySelector('.summary-icon');
-        const text = summary.querySelector('.summary-text');
-        
-        if (detail.open) {
-          icon.textContent = '−';
-          text.textContent = 'Hide abstract';
-        } else {
-          icon.textContent = '+';
-          text.textContent = 'Show abstract';
-        }
-      });
-    });
-  });
-</script>
