@@ -11,9 +11,37 @@ const { title } = Astro.props;
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="UTF-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>{title}</title>
-    <meta name="description" content="Christian Johannes Meyer - Development Economist at University of Oxford" />
-    <meta name="article:author" content="Christian Johannes Meyer" />
+    
+    <!-- Primary Meta Tags -->
+    <title>{title}</title>
+    <meta name="title" content={title} />
+    <meta name="description" content={description} />
+    <meta name="author" content="Christian Johannes Meyer" />
+    <meta name="keywords" content="development economics, labor economics, Ethiopia, behavioral economics, field experiments, Oxford, Tabiya" />
+    <link rel="canonical" href={url} />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={url} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={image} />
+    <meta property="og:site_name" content="Christian Johannes Meyer" />
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content={url} />
+    <meta property="twitter:title" content={title} />
+    <meta property="twitter:description" content={description} />
+    <meta property="twitter:image" content={image} />
+
+    <!-- Preconnect to external domains -->
+    <link rel="preconnect" href="https://cdn.sanity.io" />
+    <link rel="dns-prefetch" href="https://cdn.sanity.io" />
+
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <!-- Google Analytics -->
     {import.meta.env.PUBLIC_GA_ID && (
