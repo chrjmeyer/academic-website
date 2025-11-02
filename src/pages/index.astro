@@ -105,8 +105,13 @@ const categoryLabels = {
 
   <main class="container">
     <article>
+
+      <!-- Add a visually hidden h1 for semantics -->
+      <h1 class="visually-hidden">About Christian Johannes Meyer</h1>
+
       <!-- Bio Section with Photo -->
-      <section>
+      <section aria-labelledby="about-heading">
+        <h2 id="about-heading" class="visually-hidden">Biography</h2>
         <div class="bio-section">
           <div class="bio-text">
             {bio.bio.split('\n\n').map(paragraph => (
@@ -190,7 +195,7 @@ const categoryLabels = {
                         </a>
                       )}
                       {paper.links && paper.links.length > 0 && paper.links.map((link, idx) => (
-                        <a href={link.url} target="_blank" key={idx}>{link.text}</a>
+                      <a href={link.url} target="_blank" rel="noopener noreferrer">{link.text}</a>
                       ))}
                     </div>
                   </article>
@@ -202,7 +207,7 @@ const categoryLabels = {
       </section>
     </article>
   </main>
-</Layout>
+
 
 <script>
   // Toggle abstract summary text and icon
@@ -254,3 +259,5 @@ const categoryLabels = {
       "Field Experiments"
     ]
   })} />
+
+</Layout>
