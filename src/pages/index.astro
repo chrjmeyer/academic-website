@@ -104,101 +104,103 @@ const categoryLabels = {
   </header>
 
   <main class="container">
-    <!-- Bio Section with Photo -->
-    <section>
-      <div class="bio-section">
-        <div class="bio-text">
-          {bio.bio.split('\n\n').map(paragraph => (
-            <p set:html={paragraph} />
-          ))}
-        </div>
-        
-        {bio.photoUrl && (
-          <img src={bio.photoUrl} alt={bio.name} class="bio-photo" />
-        )}
-      </div>
-    </section>
-
-    <!-- Research Section -->
-    <section>
-      <h2>Research</h2>
-      
-      {paperCategories.map(category => {
-        const papers = papersByCategory[category];
-        if (!papers || papers.length === 0) return null;
-        
-        return (
-          <div class="paper-category">
-            <h3>{categoryLabels[category]}</h3>
-            <div class="papers">
-              {papers.map(paper => (
-                <article class="paper">
-                  <h4>{paper.title}</h4>
-                  <p class="authors">{paper.authors}</p>
-                  <p class="publication" set:html={(() => {
-                    const parts = [];
-                    
-                    // Add journal/venue in italics
-                    if (paper.journal) parts.push(`<em>${paper.journal}</em>`);
-                    if (paper.venue) parts.push(`<em>${paper.venue}</em>`);
-                    
-                    // Add volume
-                    if (paper.volume) parts.push(paper.volume);
-                    
-                    // Add pages
-					if (paper.pages) parts.push(paper.pages);
-                    
-                    // Add paper number
-                    if (paper.number) parts.push(`No. ${paper.number}`);
-                    
-                    // Add status in parentheses
-                    if (paper.status) parts.push(`(${paper.status})`);
-                    
-                    // Add year (optional for work in progress)
-                    if (paper.year) parts.push(paper.year.toString());
-                    
-                    // Add DOI
-					if (paper.doi) {
-					parts.push(`<a href="https://doi.org/${paper.doi}" target="_blank">doi:${paper.doi}</a>`);
-					}
-										
-                    // Join with commas and return (or return nothing if no parts)
-                    return parts.length > 0 ? parts.join(', ') : '';
-                  })()} />
-                  
-                  {paper.abstract && (
-                    <details class="paper-details">
-                      <summary>
-                        <span class="summary-icon">+</span>
-                        <span class="summary-text">Show abstract</span>
-                      </summary>
-                      <p class="abstract">{paper.abstract}</p>
-                    </details>
-                  )}
-                  
-                  <div class="paper-links">
-                    {paper.pdfUrl && (
-                      <a href={paper.pdfUrl} target="_blank" class="pdf-link">
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                          <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
-                          <path d="M14 2v6h6"/>
-                          <path d="M12 18v-6"/>
-                          <path d="M9 15l3 3 3-3"/>
-                        </svg>
-                        PDF
-                      </a>
-                    )}
-                    {paper.links && paper.links.length > 0 && paper.links.map((link, idx) => (
-                      <a href={link.url} target="_blank" key={idx}>{link.text}</a>
-                    ))}
-                  </div>
-                </article>
-              ))}
-            </div>
+    <article>
+      <!-- Bio Section with Photo -->
+      <section>
+        <div class="bio-section">
+          <div class="bio-text">
+            {bio.bio.split('\n\n').map(paragraph => (
+              <p set:html={paragraph} />
+            ))}
           </div>
-        );
-      })}
-    </section>
+          
+          {bio.photoUrl && (
+            <img src={bio.photoUrl} alt={bio.name} class="bio-photo" />
+          )}
+        </div>
+      </section>
+
+      <!-- Research Section -->
+      <section>
+        <h2>Research</h2>
+        
+        {paperCategories.map(category => {
+          const papers = papersByCategory[category];
+          if (!papers || papers.length === 0) return null;
+          
+          return (
+            <div class="paper-category">
+              <h3>{categoryLabels[category]}</h3>
+              <div class="papers">
+                {papers.map(paper => (
+                  <article class="paper">
+                    <h4>{paper.title}</h4>
+                    <p class="authors">{paper.authors}</p>
+                    <p class="publication" set:html={(() => {
+                      const parts = [];
+                      
+                      // Add journal/venue in italics
+                      if (paper.journal) parts.push(`<em>${paper.journal}</em>`);
+                      if (paper.venue) parts.push(`<em>${paper.venue}</em>`);
+                      
+                      // Add volume
+                      if (paper.volume) parts.push(paper.volume);
+                      
+                      // Add pages
+            if (paper.pages) parts.push(paper.pages);
+                      
+                      // Add paper number
+                      if (paper.number) parts.push(`No. ${paper.number}`);
+                      
+                      // Add status in parentheses
+                      if (paper.status) parts.push(`(${paper.status})`);
+                      
+                      // Add year (optional for work in progress)
+                      if (paper.year) parts.push(paper.year.toString());
+                      
+                      // Add DOI
+            if (paper.doi) {
+            parts.push(`<a href="https://doi.org/${paper.doi}" target="_blank">doi:${paper.doi}</a>`);
+            }
+                      
+                      // Join with commas and return (or return nothing if no parts)
+                      return parts.length > 0 ? parts.join(', ') : '';
+                    })()} />
+                    
+                    {paper.abstract && (
+                      <details class="paper-details">
+                        <summary>
+                          <span class="summary-icon">+</span>
+                          <span class="summary-text">Show abstract</span>
+                        </summary>
+                        <p class="abstract">{paper.abstract}</p>
+                      </details>
+                    )}
+                    
+                    <div class="paper-links">
+                      {paper.pdfUrl && (
+                        <a href={paper.pdfUrl} target="_blank" class="pdf-link">
+                          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                            <path d="M14 2v6h6"/>
+                            <path d="M12 18v-6"/>
+                            <path d="M9 15l3 3 3-3"/>
+                          </svg>
+                          PDF
+                        </a>
+                      )}
+                      {paper.links && paper.links.length > 0 && paper.links.map((link, idx) => (
+                        <a href={link.url} target="_blank" key={idx}>{link.text}</a>
+                      ))}
+                    </div>
+                  </article>
+                ))}
+              </div>
+            </div>
+          );
+        })}
+      </section>
+    </article>
   </main>
 </Layout>
 
